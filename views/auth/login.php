@@ -12,13 +12,13 @@ if (Session::get('user_id')) {
 
 <head>
   <meta charset="UTF-8">
-  <title>ICOMS — Login</title>
+  <title>CommuniTea Café Ph — Login</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Lexend:wght@100..900&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
   <link href="/icoms/public/css/base.css" rel="stylesheet">
   <link href="/icoms/public/css/login.css" rel="stylesheet">
 </head>
@@ -27,11 +27,12 @@ if (Session::get('user_id')) {
 
   <div class="login-card">
     <div class="text-center mb-4">
-      <div class="brand">
-        <i class="bi bi-cup-hot-fill"></i> ICOMS
+      <img src="/icoms/public/img/logo.png" alt="CommuniTea Café Ph" style="width:72px;height:72px;object-fit:contain;margin-bottom:0.75rem;filter:drop-shadow(0 4px 8px rgba(171,40,96,0.25));border-radius:50%;">
+      <div class="brand" style="font-size:1.45rem;font-family:'DM Serif Display',Georgia,serif;">
+        CommuniTea Café Ph
       </div>
-      <p class="login-subtitle mb-0">
-        Integrated Cafe Inventory and Operation Management System
+      <p class="login-subtitle mb-0 small text-muted">
+        Where passion meets purpose · Est. 2023
       </p>
     </div>
 

@@ -23,7 +23,7 @@ class Database
                     ]
                 );
             } catch (PDOException $e) {
-                die("❌ DB Connection failed: " . $e->getMessage());
+                throw new Exception("Database connection failed. Please ensure MySQL is running in XAMPP: " . $e->getMessage());
             }
         }
         return self::$pdo;

@@ -7,21 +7,33 @@ $(function () {
     $btn.prop('disabled', true).html('<span class="spinner-border spinner-border-sm"></span> Signing in...');
     $('#loginAlert').html('');
 
-    $.post(API, $(this).serialize() + '&action=login')
+    $.ajax({
+      url: API,
+      type: 'POST',
+      data: $(this).serialize() + '&action=login',
+      dataType: 'json'
+    })
       .done(res => {
-        if (res.success) {
-          const role = res.data.role;
+        if (res && res.success) {
+          const role = res.data?.role;
           const dest = role === 'owner'
             ? '/icoms/views/owner/dashboard.php'
             : '/icoms/views/staff/ordering.php';
           window.location.href = dest;
         } else {
-          showError(res.message);
+          const msg = (res && res.message) ? res.message : (typeof res === 'string' ? res : 'Invalid username or password.');
+          showError(msg);
         }
       })
       .fail(xhr => {
-        const msg = xhr.responseJSON?.message || 'Login failed. Please try again.';
-        showError(msg);
+        let msg = xhr.responseJSON?.message;
+        if (!msg && xhr.responseText) {
+          const cleanText = xhr.responseText.replace(/<[^>]+>/g, '').trim();
+          if (cleanText.length > 0 && cleanText.length < 250) {
+            msg = cleanText;
+          }
+        }
+        showError(msg || 'Invalid username or password. Please verify MySQL is started in XAMPP.');
       })
       .always(() => {
         $btn.prop('disabled', false).html('<i class="bi bi-box-arrow-in-right"></i> Sign In');
@@ -29,9 +41,14 @@ $(function () {
   });
 
   function showError(msg) {
+    const text = (msg && msg !== 'undefined') ? msg : 'Unable to sign in. Please verify your credentials and database connection.';
     $('#loginAlert').html(
-      `<div class="alert alert-danger py-2 small">${msg}</div>`
+      `<div class="alert alert-danger py-2 small shadow-sm">${escapeHtml(text)}</div>`
     );
+  }
+
+  function escapeHtml(s) {
+    return $('<div>').text(s ?? '').html();
   }
 
   $('#togglePassword').on('click', function () {

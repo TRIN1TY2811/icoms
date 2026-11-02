@@ -16,13 +16,17 @@ try {
         case 'login':
             $user = $svc->login($_POST['username'] ?? '', $_POST['password'] ?? '');
             Response::ok($user, 'Login successful.');
+            break;
         case 'logout':
             $svc->logout();
             Response::ok(null, 'Logged out.');
+            break;
         case 'check':
             Response::ok(Auth::user());
+            break;
         default:
             Response::error('Unknown action.', 404);
+            break;
     }
 } catch (Exception $e) {
     Response::error($e->getMessage(), 401);

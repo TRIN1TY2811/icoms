@@ -1,12 +1,18 @@
 <?php
     $current = basename($_SERVER['PHP_SELF']);
     $isOwner = $user['role'] === 'owner';
+
+    if (!empty($hideSidebar)) {
+        echo '<main class="flex-grow-1 p-0 w-100 pos-main-container">';
+        return;
+    }
 ?>
 
 <aside class="sidebar p-3 d-flex flex-column">
 
-  <div class="brand mb-4">
-    <i class="bi bi-cup-hot-fill"></i> ICOMS
+  <div class="brand mb-4 d-flex align-items-center gap-2">
+    <img src="/icoms/public/img/logo.png" alt="CommuniTea Logo" style="width:34px;height:34px;border-radius:50%;object-fit:contain;">
+    <span style="font-size:1.05rem;font-weight:700;">CommuniTea</span>
   </div>
 
   <div class="sidebar-user mb-4 p-2 rounded">
